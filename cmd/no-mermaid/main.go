@@ -1,18 +1,19 @@
 package main
 
-import "fmt"
-
 import (
 	"github.com/spf13/cobra"
+	"os"
 )
 
 var cmd = &cobra.Command{
 	Short: "Run service",
-	RunE: func(cmd *cobra.Command, args []string) {
-
+	RunE: func(cmd *cobra.Command, args []string) error {
+		return nil
 	},
 }
 
 func main() {
-	fmt.Println("vim-go")
+	if err := cmd.Execute(); err != nil {
+		os.Exit(1)
+	}
 }

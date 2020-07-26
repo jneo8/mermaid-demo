@@ -9,3 +9,5 @@ services:
       POSTGRES_PASSWORD: pwd123
     ports:
       - "5432:5432"
+    container_name: mermaid-db
+    hostname: mermaid-db
