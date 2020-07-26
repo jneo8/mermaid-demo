@@ -3,6 +3,11 @@
 up-postgresql:  ## postgresql
 	docker-compose -f ./infra/docker-compose-postgres.yaml up -d
 
+client-postgres:  ## run pgcli client
+	pgcli -h localhost -p 5432 -U postgres
+
+.PHONY: up-postgresql client-postgresql
+
 ##@ Help
 
 .PHONY: help
