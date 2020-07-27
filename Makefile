@@ -18,7 +18,6 @@ run-without-mermaid-example:  ## Run without mermaid example
 .PHONY: run-with-mermaid-example run-without-mermaid-example
 
 ##@ Test
-.PHONY: test install-richgo
 
 install-richgo:  ## Install richgo
 	go get -u github.com/kyoh86/richgo
@@ -44,6 +43,8 @@ test:  ## Run test
 		fi; \
 	done
 
+.PHONY: test install-richgo
+
 ##@ Infra
 
 up-postgresql:  ## postgresql
@@ -55,8 +56,9 @@ client-postgres:  ## run pgcli client
 create-db:  ## Create database in postgres
 	docker exec -it mermaid-db psql -c 'create database mermaid_demo' -U postgres
 
+.PHONY: up-postgresql client-postgres create-db
+
 ##@ lint
-.PHONY: linter-run install-lint create-db
 
 install-lint:  ## Install golangci-lint to ./bin
 		curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.27.0
@@ -64,15 +66,14 @@ install-lint:  ## Install golangci-lint to ./bin
 linter-run:  ## Run linter for all
 		./bin/golangci-lint run ./...
 
-
-.PHONY: up-postgresql client-postgresql
+.PHONY: linter-run install-lint create-db
 
 ##@ Help
 
-.PHONY: help
-
 help:  ## Display this help
 		@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n"} /^[a-zA-Z0-9_-]+:.*?##/ { printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
+
+.PHONY: help
 
 .DEFAULT_GOAL := help
 
