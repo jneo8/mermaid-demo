@@ -8,10 +8,14 @@ TESTTAGS ?= ""
 PROJ = mermaid-demo
 
 ##@ Run
-.PHONY: run-with-mermaid-example
 
 run-with-mermaid-example:  ## Run with mermaid example
 	go run ./cmd/with-mermaid/main.go
+
+run-without-mermaid-example:  ## Run without mermaid example
+	go run ./cmd/without-mermaid/main.go
+
+.PHONY: run-with-mermaid-example run-without-mermaid-example
 
 ##@ Test
 .PHONY: test install-richgo
