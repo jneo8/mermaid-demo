@@ -20,6 +20,7 @@ require (
 	github.com/mdempsky/gocode v0.0.0-20200405233807-4acdcbdea79d // indirect
 	github.com/nicksnyder/go-i18n v1.10.1 // indirect
 	github.com/pelletier/go-toml v1.8.0 // indirect
+	github.com/sirupsen/logrus v1.2.0
 	github.com/spf13/cobra v1.0.0
 	github.com/stamblerre/gocode v1.0.0 // indirect
 	go.uber.org/dig v1.10.0

@@ -31,7 +31,7 @@ func NewEngine(config Config) (*xorm.Engine, error) {
 			config.DBName,
 		),
 	)
-	engine.ShowSQL()
+	// engine.ShowSQL()
 
 	if err != nil {
 		return engine, err

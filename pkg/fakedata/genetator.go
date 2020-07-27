@@ -3,11 +3,19 @@ package fakedata
 import (
 	"github.com/brianvoe/gofakeit/v5"
 	"github.com/jneo8/mermaid-demo/entity"
+	"go.uber.org/dig"
 	"time"
 )
 
 func init() {
 	gofakeit.Seed(time.Now().UnixNano())
+}
+
+// Config ...
+type Config struct {
+	dig.In
+	MaxAge int `name:"max_age"`
+	MinAge int `name:"min_age"`
 }
 
 // Generator ...
@@ -16,12 +24,24 @@ type Generator interface {
 }
 
 // NewGenerator ...
-func NewGenerator() Generator {
-	return &repo{N: 123}
+func NewGenerator(config Config) Generator {
+	lookups := map[string]gofakeit.Info{
+		"age": gofakeit.Info{
+			Category: "Person",
+			Output:   "int",
+			Call: func(m *map[string][]string, info *gofakeit.Info) (interface{}, error) {
+				return gofakeit.Number(config.MinAge, config.MaxAge), nil
+			},
+		},
+	}
+	for k, v := range lookups {
+		gofakeit.AddFuncLookup(k, v)
+	}
+	return &repo{Config: config}
 }
 
 type repo struct {
-	N int
+	Config Config
 }
 
 func (r *repo) NewPerson() entity.Person {

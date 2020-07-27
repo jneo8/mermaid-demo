@@ -4,4 +4,5 @@ package entity
 type Person struct {
 	Name  string `fake:"{name}"`
 	Phone string `fake:"{phone}"`
+	Age   int    `fake:"{age}"`
 }
