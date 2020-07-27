@@ -8,10 +8,10 @@ TESTTAGS ?= ""
 PROJ = mermaid-demo
 
 ##@ Run
-.PHONY: run-example
+.PHONY: run-with-mermaid-example
 
-run-example:  ## Run ./cmd/example/main.go
-	go run ./cmd/example/main.go
+run-with-mermaid-example:  ## Run with mermaid example
+	go run ./cmd/with-mermaid/main.go
 
 ##@ Test
 .PHONY: test install-richgo
@@ -48,11 +48,11 @@ up-postgresql:  ## postgresql
 client-postgres:  ## run pgcli client
 	pgcli -h localhost -p 5432 -U postgres
 
-create-db:
+create-db:  ## Create database in postgres
 	docker exec -it mermaid-db psql -c 'create database mermaid_demo' -U postgres
 
 ##@ lint
-.PHONY: linter-run install-lint
+.PHONY: linter-run install-lint create-db
 
 install-lint:  ## Install golangci-lint to ./bin
 		curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.27.0

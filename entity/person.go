@@ -2,6 +2,6 @@ package entity
 
 // Person ...
 type Person struct {
-	Name  string
-	Phone string
+	Name  string `fake:"{name}"`
+	Phone string `fake:"{phone}"`
 }
